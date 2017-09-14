@@ -78,8 +78,12 @@ function showScore() {
 	$('#correct_answers').html("Correct")
 	$('#b').html(incorrect);
 	$('#incorrect_answers').html("Incorrect")
+	$('#c').html('Good Job');	
+	$('#hidden').html("Drink more Whiskey")
+	console.log("Correct:" + correct);
 	countdownTimer.stop();
 	$('#seconds').empty();
+	$('#start_button').show();
 }
 
 $('#start_button').on('click', function() {
@@ -98,7 +102,7 @@ $('.answer').on('click', function() {
  	if (index < questions_answers.length) {
  	loadQuestion(index);
  	} else {
- 		$(".answer").hide();
+ 		/*$(".answer").hide();*/
  		showScore();
  	}
 });
