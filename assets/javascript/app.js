@@ -1,53 +1,106 @@
+var questions_answers =[["Scotch is made in which country?", "Scotland","Ireland","America"],["Which of the following is not true for Bourbon", "Made in America", "At least 51% wheat", "Fermented with Bald Eagles tears"],["Whiskey is made with which of the following?","Love","Beer","Oranges"]];
+var responses = [];
 
-/*Variables*/
-var count=16;
-var i = 0;
-var questions=["Scotch is made in which country?", "In order to be Bourbon, which of the following must be true?","Whiskey is made with which of the following?"];
-var answers =[["Scotland","Ireland","America"],["Made in America", "Be at least 51% wheat", "Fermented with the tears of Bald Eagles"],["Love","Beer","Oranges"]]
-var counter;
+$( document ).ready(function() {
+	var index = 0;
+	var countdownTimer = {
+		time : 15,
+		reset: function() {
+			this.time = 15;
+			document.getElementById('seconds').innerHTML = this.time;
+		},
+		start: function() {
+			counter = setInterval(countdownTimer.count, 1000);	
+		},
+		stop: function() {
+			clearInterval(counter);
+		},
+		count: function() {
+				countdownTimer.time--;
+				console.log(countdownTimer.time);
+			if (countdownTimer.time >= 0) {
+				$('#seconds').html(countdownTimer.time);
+			}
+			else {
+				index++;
+				responses.push(0);
+				countdownTimer.reset();
+				if (index < questions_answers.length) {
+					loadQuestion(index);
+				} else {
+					$(".answer").hide();
+					showScore();
+				}
+			}
+		}
+	};
 
+function loadQuestion(questionSelection) {
+	console.log(questionSelection);
+	countdownTimer.reset();
+  $("#questions").html(questions_answers[questionSelection][0]);
+  $("#a").html(questions_answers[questionSelection][1]).show();
+  $("#b").html(questions_answers[questionSelection][2]).show();
+  $("#c").html(questions_answers[questionSelection][3]).show();
+}	
 
-/*Functions*/
+function getAnswer() {
 
-function timer() {
-	count=count-1;
-	if (count <= 0) {
-		clearInterval(counter);
-		return printQuestion;
+//  nextQuestion();
+	$('.answer').on('click', function() {
+	  console.log('alert', index);
+		index++;
+		console.log('click', index);
+		$("#questions").html('');
+		$("#a").html('');
+		$("#b").html('');
+		$("#c").html('');
+		loadQuestion();
+	})
+}
+
+function showScore() {
+	var correct = 0;
+	var incorrect = 0;
+	var key_list = [1,3,2];
+	/*Count correct and incorrect answers*/
+	for(i=0; i<responses.length; i++) {
+		if(responses[i] === key_list[i]) {
+			correct += 1;
+		}
+		else {
+			incorrect += 1;
+		}
+
 	}
-	document.getElementById("seconds").innerHTML=count;
- 	$("#start_button").on("click", function quiz() {
-		clearInterval(counter);
-		counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-		printQuestion(questions);
-	}) //end on.click event
-} //end function timer()
+	$('#questions').html("Here's how you did!");
+	$('#a').html(correct);
+	$('#correct_answers').html("Correct")
+	$('#b').html(incorrect);
+	$('#incorrect_answers').html("Incorrect")
+	countdownTimer.stop();
+	$('#seconds').empty();
+}
 
-function printQuestion(questions) {
-	if(i===questions.length) {
-		return results();
-	}
-	document.getElementById("questions").innerHTML=questions[i];
-	document.getElementById("a").innerHTML=answers[i][0];
-	document.getElementById("b").innerHTML=answers[i][1];
-	document.getElementById("c").innerHTML=answers[i][2];
-	i += 1;
-} //end function printQuestions()
+$('#start_button').on('click', function() {
+	index = 0;
+	$(this).hide();
+	countdownTimer.start();
+ 	loadQuestion(index);
+});
 
-function results() {
-	$("#start_button").show();
-	document.getElementById("questions").innerHTML="Here's how you did!";
-	document.getElementById("a").innerHTML=correct;
-	document.getElementById("b").innerHTML=incorrect;
-	document.getElementById("c").innerHTML=";
-} //end function results()
+$('.answer').on('click', function() {
+	e = $(this).attr("value");
+	responses.push(parseInt(e));
+	console.log(e);
+	console.log(responses);
+ 	index++;
+ 	if (index < questions_answers.length) {
+ 	loadQuestion(index);
+ 	} else {
+ 		$(".answer").hide();
+ 		showScore();
+ 	}
+});
 
-
-//Click to start quiz
-$("#start_button").on("click", function quiz() {
-	$("#start_button").hide();
-	i = 0;
-	clearInterval(counter);
-	counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-	printQuestion(questions);
-}) //end on.click event
+});

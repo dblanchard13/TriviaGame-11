@@ -7,12 +7,7 @@ body {
     font:14px/22px 'Helvetica Neue', Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
     margin: 0px;
 }
@@ -45,75 +40,9 @@ ul {
     list-style: none;
 }
 
-a {
-    -webkit-transition: all 0.5s ease-in-out 0s;
-    -moz-transition: all 0.5s ease-in-out 0s;
-    -o-transition: all 0.5s ease-in-out 0s;
-    transition: all 0.5s ease-in-out 0s;
-}
-
-a:focus,
-.btn:focus,
-.btn:active:focus {
-    box-shadow: none;
-    outline: 0 none;
-}
-a,
-a:active,
-a:focus,
-a:active {
-    text-decoration: none;
-}
-
 .section {
     padding: 100px 0;
 }
-/*--
-Heading
---*/
-
-.heading {
-    text-align: center;
-    color: #777777;
-    padding-bottom: 70px;
-}
-.heading h2 {
-    color: #3c3c3c;
-    padding-bottom: 30px;
-    text-transform: capitalize;
-    font-weight: 300;
-    font-size: 40px;
-    line-height: 40px;
-}
-.heading p {
-    font-size: 18px;
-    line-height: 28px;
-    font-weight: 300;
-}
-
-.sub-heading {
-    margin-bottom: 30px;
-}
-
-.sub-heading h3 {
-    font-size: 30px;
-    line-height: 40px;
-}
-
-.sub-heading h3 small {
-    font-weight: 300;
-}
-
-.sub-heading h4 {
-    font-size: 25px;
-    margin-bottom: 15px;
-}
-
-.sub-heading > p {
-    font-size: 14px;
-    color: #777;
-}
-
 .btn {    
     border-radius: 0;
 }
