@@ -157,6 +157,12 @@ ul {
     font-size: 16px;
     font-weight: 300;
 }
+/*
+  You should take a look at reducing the size of your answer text. As it stands currently,
+  the answer text overflows the container and you can't see the full text.
+  Also, would be nice to have `cursor: pointer;` so that the answer text appears clickable
+  to the user.
+*/
 #main .block .main-dash ul li .answer {
     display: inline-block;
     font-size: 50px;
